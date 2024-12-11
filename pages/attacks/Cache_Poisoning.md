@@ -99,7 +99,7 @@ store the response in the cache.
 
 We may get this effect by setting the following headers:
 
-- Last-Modified (checked byt the If-Modified-Since header)
+- Last-Modified (checked by the If-Modified-Since header)
 - ETag (checked by the If-None-Match header)
 
 3. Sending request for the page, which we want to replace in the cache of the server
@@ -137,4 +137,4 @@ The request examples used are from the Amit Klein paper referenced below, which 
 needs of the article.
 
 More information can be found in this document, which focuses on these
-kinds of attacks [by Amit Klein, Director of Security and Research](http://packetstormsecurity.org/papers/general/whitepaper_httpresponse.pdf)
+kinds of attacks [by Amit Klein, Director of Security and Research](https://packetstormsecurity.com/files/32815/Divide-and-Conquer-HTTP-Response-Splitting-Whitepaper.html)

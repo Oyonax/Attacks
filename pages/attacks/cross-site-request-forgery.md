@@ -3,7 +3,7 @@
 layout: col-sidebar
 title: Cross Site Request Forgery (CSRF)
 author: KirstenS
-contributors: Dave Wichers, Davisnw, Paul Petefish, Adar Weidman, Michael Brooks, Ahsan Mir, Dc, D0ubl3 h3lix, Jim Manico, Robert Gilbert, Tgondrom, Pawel Krawczyk, Brandt, A V Minhaz, Kevin Lorenzo, Andrew Smith, Christina Schelin, Ari Elias-Bachrach, Sarciszewski, kingthorin, Ben Spatafora
+contributors: Dave Wichers, Davisnw, Paul Petefish, Adar Weidman, Michael Brooks, Ahsan Mir, Dc, D0ubl3 h3lix, Jim Manico, Robert Gilbert, Tgondrom, Pawel Krawczyk, Brandt, A V Minhaz, Kevin Lorenzo, Andrew Smith, Christina Schelin, Ari Elias-Bachrach, Sarciszewski, kingthorin, Ben Spatafora, Krishna Madala
 permalink: /attacks/csrf
 tags: attack, CSRF
 
@@ -156,6 +156,17 @@ HTTPS by itself does nothing to defend against CSRF.
 However, HTTPS should be considered a prerequisite for any preventative
 measures to be trustworthy.
 
+### Validating the Referrer Header
+
+This doesn't work in practice because the referrer header can be easily 
+spoofed by an attacker. Additionally, some users or browsers might not 
+send the referrer header due to privacy settings or policies, leading to false
+positives. Moreover, there are situations where the referrer can be null, such 
+as when a user navigates to a site from a bookmark or any other resource without 
+a traditional url. In these scenarios, legitimate requests could be mistaken as 
+potential CSRF attacks, which would result in more potential false positive flags.
+
+
 ## Examples
 
 ### How does the attack work?
@@ -178,7 +189,7 @@ If the application was designed to primarily use GET requests to
 transfer parameters and execute actions, the money transfer operation
 might be reduced to a request like:
 
-`GET http://bank.com/transfer.do?acct=BOB&amount=100 HTTP/1.1`
+`GET http://bank.com/transfer.do?acct=BOB&amount=100 HTTP/1.1`
 
 Maria now decides to exploit this web application vulnerability using
 Alice as the victim. Maria first constructs the following exploit URL
@@ -199,11 +210,11 @@ techniques:
 The exploit URL can be disguised as an ordinary link, encouraging the
 victim to click it:
 
-`<a href="http://bank.com/transfer.do?acct=MARIA&amount=100000">View my Pictures!</a>`
+`<a href="http://bank.com/transfer.do?acct=MARIA&amount=100000">View my Pictures!</a>`
 
 Or as a 0x0 fake image:
 
-`<img src="http://bank.com/transfer.do?acct=MARIA&amount=100000" width="0" height="0" border="0">`
+`<img src="http://bank.com/transfer.do?acct=MARIA&amount=100000" width="0" height="0" border="0">`
 
 If this image tag were included in the email, Alice wouldn't see
 anything. However, the browser *will still* submit the request to
@@ -222,7 +233,7 @@ being executed by the victim. Let's assume the bank now uses POST and
 the vulnerable request looks like this:
 
 ```
-POST http://bank.com/transfer.do HTTP/1.1
+POST http://bank.com/transfer.do HTTP/1.1
 
 acct=BOB&amount=100
 ```
@@ -256,9 +267,9 @@ PUT or DELETE. Let's assume the vulnerable bank uses PUT that takes a
 JSON block as an argument:
 
 ```
-PUT http://bank.com/transfer.do HTTP/1.1
+PUT http://bank.com/transfer.do HTTP/1.1
 
-{ "acct":"BOB", "amount":100 }
+{ "acct":"BOB", "amount":100 }
 ```
 
 Such requests can be executed with JavaScript embedded into an exploit
@@ -266,11 +277,11 @@ page:
 
 ```
 <script>
-function put() {
-    var x = new XMLHttpRequest();
-    x.open("PUT","http://bank.com/transfer.do",true);
-    x.setRequestHeader("Content-Type", "application/json");
-    x.send(JSON.stringify({"acct":"BOB", "amount":100})); 
+function put() {
+    var x = new XMLHttpRequest();
+    x.open("PUT","http://bank.com/transfer.do",true);
+    x.setRequestHeader("Content-Type", "application/json");
+    x.send(JSON.stringify({"acct":"BOB", "amount":100})); 
 }
 </script>
 
@@ -285,7 +296,7 @@ web site explicitly opens up cross-origin requests from the attacker's
 [CORS](https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html)
 with the following header:
 
-`Access-Control-Allow-Origin: *`
+`Access-Control-Allow-Origin: *`
 
 ## Related [Attacks](https://owasp.org/www-community/attacks/)
 
@@ -315,8 +326,8 @@ with the following header:
 - [CSRF Vulnerability: A 'Sleeping Giant'](https://www.darkreading.com/risk/csrf-vulnerability-a-sleeping-giant/d/d-id/1128371)
   - Overview Paper
 
-- [Client Side Protection against Session Riding](http://www.owasp.org/index.php/Image:RequestRodeo-MartinJohns.pdf)
-  - Martin Johns and Justus Winter's interesting paper and presentation for the 4th OWASP AppSec Conference which described potential techniques that browsers could adopt to automatically provide CSRF protection - [PDF paper](http://www.owasp.org/index.php/Image:RequestRodeo-MartinJohns.pdf)
+- [Client Side Protection against Session Riding](https://wiki.owasp.org/index.php/File:RequestRodeo-MartinJohns.pdf)
+  - Martin Johns and Justus Winter's interesting paper and presentation for the 4th OWASP AppSec Conference which described potential techniques that browsers could adopt to automatically provide CSRF protection - [PDF paper](https://wiki.owasp.org/index.php/File:RequestRodeo-MartinJohns.pdf)
 
 - [OWASP CSRF Guard](/www-project-csrfguard/)
   - J2EE, .NET, and PHP Filters which append a unique request token to each form and link in the HTML response in order to provide universal coverage against CSRF throughout your entire application.

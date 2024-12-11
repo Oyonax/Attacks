@@ -33,10 +33,6 @@ errors, and its exploitation can result in other consequences including
 Injection](https://owasp.org/www-community/attacks/SQL_Injection), file inclusion, and path
 disclosure attacks.
 
-For a short video clip describing the vulnerability, [click
-here](http://www.youtube.com/watch?v=l5LCDEDn7FY&hd=1) (Courtesy of
-[Checkmarx](http://www.checkmarx.com/))
-
 ## Examples
 
 ### Example 1
@@ -56,7 +52,9 @@ malicious user can tamper with the values stored on their browser and
 change the referred information. For example, an e-commerce shopping
 site uses hidden fields to refer to its items, as follows:
 
-<input type=”hidden” id=”1008” name=”cost” value=”70.00”>
+```html
+<input type="hidden" id="1008" name="cost" value="70.00">
+```
 
 In this example, an attacker can modify the “value” information of a
 specific item, thus lowering its cost.

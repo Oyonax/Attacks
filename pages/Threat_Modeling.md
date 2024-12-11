@@ -1,5 +1,4 @@
 ---
-
 layout: col-sidebar
 title: Threat Modeling
 author: Victoria Drake
@@ -13,6 +12,8 @@ redirect_from:
 ---
 
 {% include writers.html %}
+
+This is an OWASP community page. You should also visit the official [Threat Model Project](https://owasp.org/www-project-threat-model/) site.
 
 ## Overview
 
@@ -60,10 +61,10 @@ Updating threat models is advisable after events such as:
 
 A possible threat exists when the combined likelihood of the threat occurring and impact it would have on the organization create a significant risk. The following four question framework can help to organize threat modeling:
 
-  - What are we working on?
-  - What can go wrong?
-  - What are we going to do about it?
-  - Did we do a good job?
+- What are we working on?
+- What can go wrong?
+- What are we going to do about it?
+- Did we do a good job?
 
 There are many methods or techniques that can be used to answer each of these questions. There is no "right" way to evaluate the search space of possible threats, but structured models exist in order to help make the process more efficient.
 
@@ -87,5 +88,5 @@ The threat modeling process naturally produces an assurance argument that can be
 ## Further Reading
 
 - [Threat Modeling Process](Threat_Modeling_Process.md)
-- [Microsoft's Security Development Process](https://www.microsoft.com/en-us/securityengineering/sdl)
+- [Microsoft Security Development Lifecycle](https://www.microsoft.com/en-us/securityengineering/sdl)
 - [Microsoft Threat Modeling](https://www.microsoft.com/en-us/securityengineering/sdl/threatmodeling)

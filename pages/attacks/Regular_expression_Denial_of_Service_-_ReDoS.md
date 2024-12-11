@@ -75,11 +75,10 @@ A Regex pattern is called **Evil Regex** if it can get stuck on crafted input.
 
 **Examples of Evil Regex**:
 
-- `(a+)+`
-- `([a-zA-Z]+)*`
-- `(a|aa)+`
-- `(a|a?)+`
-- `(.*a){x} for x \> 10`
+- `(a+)+$`
+- `([a-zA-Z]+)*$`
+- `(a|aa)+$`
+- `(a|a?)+$`
 
 All the above are susceptible to the input
 `aaaaaaaaaaaaaaaaaaaaaaaa!` (The minimum input length might change
@@ -147,17 +146,17 @@ The following example checks if the username is part of the password
 entered by the user.
 
 ```
-String userName = textBox1.Text;
-String password = textBox2.Text;
-Regex testPassword = new Regex(userName);
-Match match = testPassword.Match(password);
-if (match.Success)
+String userName = textBox1.Text;
+String password = textBox2.Text;
+Regex testPassword = new Regex(userName);
+Match match = testPassword.Match(password);
+if (match.Success)
 {
-    MessageBox.Show("Do not include name in password.");
+    MessageBox.Show("Do not include name in password.");
 }
 else
 {
-    MessageBox.Show("Good password.");
+    MessageBox.Show("Good password.");
 }
 ```
 
@@ -167,8 +166,8 @@ will hang.
 
 ## References
 
-- [Regular Expression Denial Of Service / Crosby&Wallach, Usenix Security 2003](http://www.cs.rice.edu/~scrosby/hash/slides/USENIX-RegexpWIP.2.ppt)
-- [Regular expression Denial of Service Revisited, Sep-2009](http://www.checkmarx.com/NewsDetails.aspx?id=23&cat=3)
+- [Regular Expression Denial Of Service / Crosby&Wallach, Usenix Security 2003](https://web.archive.org/web/20031120114522/https://www.cs.rice.edu/~scrosby/hash/slides/USENIX-RegexpWIP.2.ppt)
+- [Regular expression Denial of Service Revisited, Sep-2009](https://web.archive.org/web/20091007100653/http://www.checkmarx.com/Upload/Documents/PDF/Checkmarx_OWASP_IL_2009_ReDoS.pdf)
 - [RegExLib](http://regexlib.com/)
 - [ReDOS Attacks: From the Exploitation to the Prevention (in .NET)](https://dzone.com/articles/regular-expressions-denial)
 - [Tool for detecting ReDoS vulnerabilities.](https://web.archive.org/web/20211027135828/https://www.cs.bham.ac.uk/~hxt/research/rxxr.shtml)
@@ -177,6 +176,6 @@ will hang.
     - [ReDoS in EntLib](https://nvd.nist.gov/vuln/detail/CVE-2009-3275)
     - [ReDoS in NASD CORE.NET Terelik](https://nvd.nist.gov/vuln/detail/CVE-2009-3276)
     - [ReDoS in .NET Framework](http://blog.malerisch.net/2015/09/net-mvc-redos-denial-of-service-vulnerability-cve-2015-2526.html)
-    - [ReDoS in Javascript minimatch](https://nodesecurity.io/advisories/118)
+    - [ReDoS in Javascript minimatch](https://nvd.nist.gov/vuln/detail/CVE-2022-3517)
 
 [Category:Injection](https://owasp.org/www-community/Injection_Flaws)

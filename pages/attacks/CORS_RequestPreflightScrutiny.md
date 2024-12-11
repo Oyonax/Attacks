@@ -46,7 +46,7 @@ process is entirely managed on client side (by the browser) and then
 anything warrant web application that the request preflight process will
 be always followed...
 
-A user can create/send (using tools like Curl,OWASP Zap Proxy,...) a
+A user can create/send (using tools like Curl, ZAP,...) a
 final HTTP request without previously send the first request for
 preflight and then bypass request preflight process in order to act on
 data in a unsafe way.
@@ -65,7 +65,6 @@ request using theses steps:
 
 **Sample implementation: Filter class**
 
-```
 ```java
 import java.io.IOException;
 import java.util.Collections;
@@ -497,12 +496,6 @@ public enum CORSRequestPreflightType {
     UNKNOWN;
 }
 ```
-
-**Note:** [W3AF](Automated_Audit_using_W3AF "wikilink") audit tools
-(http://w3af.org) contains plugins to automatically audit web
-application to check if they implements this type of countermeasure.
-
-It's very useful to include this type of tools into a web application development process in order to perform a regular automatic first level check (do not replace an manual audit and manual audit must be also conducted regularly).
 
 ## Informations links
 

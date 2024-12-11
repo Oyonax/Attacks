@@ -107,13 +107,13 @@ components over time can be expected. This is especially true for teams with tim
 Components in many software ecosystems are published and distributed to central repositories. Repositories have known 
 threats. Some of the threats against public repositories include:
 
-  - Typosquatting - naming a component in such as way as to take advantage of common misspelling
+  - Typosquatting - naming a component in such as way as to take advantage of common misspelling.
   - Organization/Group abuse - pretending to be a public person or entity and abusing the perceived trust. This includes
     dependency confusion and namespace confusion.
   - Malware through transfer - leveraging weak or absent code-signing requirements to spread malware through the 
-    transfer of an open source project from one maintainer to another
+    transfer of an open source project from one maintainer to another.
   - Cross Build Injection (XBI) - Abusing dependency resolution schemes and weak infrastructure controls to inject 
-    malicious components in place of safe ones
+    malicious components in place of safe ones.
 
 Public repositories that have code-signing and verification requirements have some level of trust, whereas public 
 repositories without basic countermeasures do not. For no-trust or low-trust repositories, utilizing private 
@@ -162,6 +162,11 @@ Like any component, transitive dependencies have their own risk which is inherit
 that relies on them. Components may additionally have specific runtime or environmental dependencies with implementation 
 details not known or prescribed by the component. Component Analysis can aggregate the risk of all direct, transitive, 
 runtime, and environmental dependencies providing a holistic view of inherited risk.
+
+From a risk mitigation standpoint, only direct dependencies can be changed in some cases. For example, a `pom.xml` file
+declares only on direct dependencies, while lock files, such as `package-lock.json` may be more flexable. 
+Any changes to transitive dependencies can potentially break the code that depends on it, and therefore, it would be 
+most impactful to focus on identifying the direct dependency fix. 
 
 #### Project Health
 
@@ -261,7 +266,8 @@ and legal teams an opportunity to create solutions for healthy open source usage
   - Prohibit the use of end-of-life (EOL) components
   - Prohibit the use of components with known vulnerabilities. Update components that are exploitable with high to 
     moderate risk first.
-  - Reduce the attack surface by excluding unnecessary direct and transitive dependencies
+  - Reduce the attack surface by excluding unnecessary direct and transitive dependencies. Focus on providing resolution
+    recommendations on direct dependencies to make it actionalbe for developers.
   - Reduce the number of suppliers and use the highest quality components from those suppliers
   - Standardize on a single component for each component function
   - Establish a maximum level of acceptable risk for public repositories. Utilize private repositories in lieu of 
@@ -282,26 +288,30 @@ and legal teams an opportunity to create solutions for healthy open source usage
 
 | Name | Owner | Licence | Platforms |
 | ---- | ----- | ------- |---------- |
-| [GitHub SCA] | GitHub | Freemium | SaaS |
+| [Aikido Security] | Aikido Security | Commercial / Freemium | Cross Platform / SaaS |
+| [Arnica] | Arnica | Commercial / Freemium | Cross Platform / SaaS |
 | [Black Duck Hub] | Synopsys | Commercial | Cross Platform |
 | [Bytesafe] | Bytesafe | Freemium | SaaS |
 | [Bytesafe Dependency Checker] | Bytesafe | Free | SaaS |
 | [CAST Highlight] | CAST Software | Commercial | SaaS |
 | [Clarity] | Insignary | Commercial | Cross Platform / SaaS |
 | [ClearlyDefined] | Open Source Initiative | Open Source | SaaS |
+| [CloudDefense.AI] | CloudDefense.AI | Commercial / Freemium | Cross Platform / SaaS |
 | [CodeSentry] | GrammaTech | Commercial | Cross Platform / SaaS |
 | [CxSCA] | Checkmarx | Commercial | SaaS |
 | [Debricked] | Debricked | Commercial/Freemium | SaaS |
 | [DejaCode] | nexB | Commercial | SaaS |
+| [Dependabot] | Dependabot | Commercial / Freemium | SaaS |
 | [Dependency-Check] | OWASP | Open Source | Cross Platform |
 | [Dependency-Track] | OWASP | Open Source | Cross Platform |
-| [Dependabot] | Dependabot | Commercial / Freemium | SaaS |
+| [Dependency Track SaaS] | YourSky.blue | Commercial | SaaS |
 | [DepShield] | Sonatype | Open Source | Cross Platform / SaaS |
 | [DotNET Retire] | Retire.NET Project | Open Source | Cross Platform |
 | [FlexNet Code Insight] | Flexera Commercial	| Cross Platform |
 | [Fluid Attack's Scanner] | Fluid Attacks | MPL 2.0. | SaaS |
 | [FOSSA] | FOSSA | Commercial / Freemium | SaaS |
 | [FOSSology] | Linux Foundation | Open Source | Cross Platform |
+| [GitHub SCA] | GitHub | Freemium | SaaS |
 | [Grafeas] | Grafeas | Open Source | Cross Platform |
 | [Greenkeeper] | Greenkeeper | Open Source | SaaS |
 | [Ion Channel SA] | Ion Channel | Commercial | SaaS |
@@ -315,57 +325,71 @@ and legal teams an opportunity to create solutions for healthy open source usage
 | [Patton] | OWASP | Open Source | Cross Platform |
 | [PHP Security Checker] | SensioLabs | Open Source | SaaS |
 | [Prisma Cloud] | Palo Alto Networks | Commercial | Cross Platform / SaaS |
+| [Protean Labs] | Protean Labs | Commercial / Freemium | SaaS |
 | [Renovate] | Key Location | Open Source | SaaS |
 | [Retire.js] | RetireJS Project | Open Source | Cross Platform |
+| [SBOM Observer] | Bytesafe  | Commercial | SaaS |
+| [Scantist SCA] | Scantist | Freemium | Cross Platform / SaaS |
 | [Snyk] | Snyk | Commercial / Freemium | SaaS |
+| [Software Health Indicator] | YourSky.blue | Commercial / Freemium | SaaS |
 | [SOOS] | SOOS | Commercial / Freemium | SaaS |
 | [Veracode SCA] | Veracode | Commercial | Cross Platform / SaaS |
-| [VulnDB] | Risk Based Security | Commercial	| SaaS |
 | [Vigiles] | Timesys | Commercial / Freemium | SaaS |
 | [Vigilant Ops InSight] | Vigilant Ops | Commercial | Cross Platform / SaaS |
+| [Vulert] | Vulert | Commercial / Freemium | Cross Platform / SaaS |
+| [VulnDB] | Risk Based Security | Commercial	| SaaS |
 | [Xray] | JFrog | Commercial | Cross Platform |
 
+[Aikido Security]: https://aikido.dev
+[Arnica]: https://arnica.io/
 [Bytesafe]: https://bytesafe.dev/
 [Bytesafe Dependency Checker]: https://bytesafe.dev/dependency-checker/javascript/
-[GitHub SCA]: https://docs.github.com/en/github/visualizing-repository-data-with-graphs/listing-the-packages-that-a-repository-depends-on/
 [Black Duck Hub]: https://www.blackducksoftware.com/
 [CAST Highlight]: https://www.castsoftware.com/SCA/
 [Clarity]: https://www.insignary.com/
 [ClearlyDefined]: https://clearlydefined.io/
+[CloudDefense.AI]: https://www.clouddefense.ai/
 [CodeSentry]: https://www.grammatech.com/codesentry-sca
 [CxSCA]: https://www.checkmarx.com/products/software-composition-analysis/
 [Debricked]: https://debricked.com/
 [DejaCode]: https://www.nexb.com/
+[Dependabot]: https://dependabot.com/
 [Dependency-Check]: https://owasp.org/www-project-dependency-check/
 [Dependency-Track]: https://owasp.org/www-project-dependency-track/
-[Dependabot]: https://dependabot.com/
+[Dependency Track SaaS]: https://yoursky.blue/products/dependency-track-saas
 [DepShield]: https://depshield.github.io/
 [DotNET Retire]: https://github.com/RetireNet/dotnet-retire
 [FlexNet Code Insight]: https://www.flexera.com/products/software-composition-analysis/flexnet-code-insight.html
 [Fluid Attack's Scanner]: https://docs.fluidattacks.com/machine/scanner
 [FOSSA]: https://fossa.com/
 [FOSSology]: https://www.fossology.org/
+[GitHub SCA]: https://docs.github.com/en/github/visualizing-repository-data-with-graphs/listing-the-packages-that-a-repository-depends-on/
 [Grafeas]: https://grafeas.io/
 [Greenkeeper]: https://greenkeeper.io/
 [OSS Review Toolkit]: https://github.com/heremaps/oss-review-toolkit
 [Ion Channel SA]: https://ionchannel.io/
 [Libraries.io]: https://libraries.io/
 [MergeBase]: http://mergebase.com/
+[Nexus IQ]: https://www.sonatype.com/
 [NPM Audit]: https://www.npmjs.com/
+[Open Source Lifecycle Management]: https://www.whitesourcesoftware.com/
 [OSS Index]: https://ossindex.sonatype.org/
+[Patton]: https://owasp.org/www-project-patton/
 [PHP Security Checker]: https://github.com/sensiolabs/security-checker
 [Prisma Cloud]: https://www.paloaltonetworks.com/prisma/cloud
+[Protean Labs]: https://protean-labs.io/
 [Renovate]: https://renovatebot.com/
+[Retire.js]: https://retirejs.github.io/retire.js/
+[SBOM Observer]: https://sbom.observer/
+[Scantist SCA]: https://scantist.com/
 [Snyk]: https://snyk.io/
+[Software Health Indicator]: https://software-health-indicator.com/
 [SOOS]: https://soos.io/
 [Veracode SCA]: https://www.veracode.com/products/software-composition-analysis
-[Nexus IQ]: https://www.sonatype.com/
-[Open Source Lifecycle Management]: https://www.whitesourcesoftware.com/
-[Retire.js]: https://retirejs.github.io/retire.js/
-[VulnDB]: https://vulndb.cyberriskanalytics.com/
-[Patton]: https://owasp.org/www-project-patton/
 [Vigiles]: https://www.timesys.com/security/vigiles-vulnerability-management-patch-monitoring/
 [Vigilant Ops InSight]: https://vigilant-ops.com/
+[Vulert]: https://vulert.com/
+[VulnDB]: https://vulndb.cyberriskanalytics.com/
 [Xray]: https://jfrog.com/xray/
 
 

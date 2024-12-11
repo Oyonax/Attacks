@@ -35,12 +35,11 @@ architecture.
 
 ```C
 #include <stdio.h>
-int main(int argc, char **argv)
-{
-char buf[8]; // buffer for eight characters
-gets(buf); // read from stdio (sensitive function!)
-printf("%s\n", buf); // print out data stored in buf
-return 0; // 0 as return value
+int main(int argc, char **argv) {
+  char buf[8];         // buffer for eight characters
+  gets(buf);           // read from stdio (sensitive function!)
+  printf("%s\n", buf); // print out data stored in buf
+  return 0;            // 0 as return value
 }
 ```
 
@@ -65,10 +64,10 @@ Usage example:
 
 ```console
 user@spin ~/inzynieria $ ./bo-simple // program start
-1234 // we eneter "1234" string from the keyboard
+1234 // we enter "1234" string from the keyboard
 1234 // program prints out the conent of the buffer
 user@spin ~/inzynieria $ ./bo-simple // start
-123456789012 // we eneter "123456789012"
+123456789012 // we enter "123456789012"
 123456789012 // content of the buffer "buf" ?!?!
 Segmentation fault // information about memory segmenatation fault
 ```
@@ -95,21 +94,19 @@ data stored in this memory area.
 #include <stdio.h>
 #include <string.h>
 
-void doit(void)
-{
-        char buf[8];
+void doit(void) {
+  char buf[8];
 
-        gets(buf);
-          printf("%s\n", buf);
+  gets(buf);
+  printf("%s\n", buf);
 }
 
-int main(void)
-{
-        printf("So... The End...\n");
-        doit();
-        printf("or... maybe not?\n");
+int main(void) {
+  printf("So... The End...\n");
+  doit();
+  printf("or... maybe not?\n");
 
-        return 0;
+  return 0;
 }
 ```
 
